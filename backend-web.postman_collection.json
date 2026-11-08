@@ -1,0 +1,43 @@
+{
+  "info": {
+    "name": "backend-web Students API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:5000" },
+    { "key": "studentId", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "Create Student",
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["if (pm.response.code === 201) { pm.collectionVariables.set('studentId', pm.response.json()._id); }"] } }],
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\n  \"name\": \"Mausmi\",\n  \"email\": \"mausmi@example.com\",\n  \"age\": 20,\n  \"course\": \"B.Tech ECE\"\n}" },
+        "url": { "raw": "{{baseUrl}}/api/students", "host": ["{{baseUrl}}"], "path": ["api", "students"] }
+      }
+    },
+    {
+      "name": "Get All Students",
+      "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/api/students", "host": ["{{baseUrl}}"], "path": ["api", "students"] } }
+    },
+    {
+      "name": "Get Student By ID",
+      "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/api/students/{{studentId}}", "host": ["{{baseUrl}}"], "path": ["api", "students", "{{studentId}}"] } }
+    },
+    {
+      "name": "Update Student",
+      "request": {
+        "method": "PUT",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\n  \"course\": \"B.Tech CSE\",\n  \"age\": 21\n}" },
+        "url": { "raw": "{{baseUrl}}/api/students/{{studentId}}", "host": ["{{baseUrl}}"], "path": ["api", "students", "{{studentId}}"] }
+      }
+    },
+    {
+      "name": "Delete Student",
+      "request": { "method": "DELETE", "url": { "raw": "{{baseUrl}}/api/students/{{studentId}}", "host": ["{{baseUrl}}"], "path": ["api", "students", "{{studentId}}"] } }
+    }
+  ]
+}
